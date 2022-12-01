@@ -1,4 +1,6 @@
-﻿using Infrastructure.Persistence;
+﻿using Application.ConfigureService;
+using Infrastructure.Persistence;
+using Infrastructure.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,7 +21,7 @@ namespace Infrastructure
             {
                 option.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
             });
-
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             return services;
         }
     }

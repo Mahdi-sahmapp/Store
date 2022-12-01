@@ -1,13 +1,13 @@
 ﻿
 using Infrastructure.Persistence.SeedData;
-using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
+using Infrastructure.Persistence.Context;
 
 namespace Web
 {
     public static class ConfigureServices
     {
-        public static IServiceCollection AddWebService( this WebApplicationBuilder builder)
+        public static IServiceCollection AddWebService(this WebApplicationBuilder builder)
         {
             // Add services to the container.
             builder.Services.AddControllers();

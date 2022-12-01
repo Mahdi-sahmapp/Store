@@ -7,7 +7,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Infrastructure.Persistence
+namespace Infrastructure.Persistence.Context
 {
     public class ApplicationDbContext : DbContext
     {
@@ -24,6 +24,6 @@ namespace Infrastructure.Persistence
         {
             base.OnModelCreating(modelbuilder);
             modelbuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-        } 
+        }
     }
 }
