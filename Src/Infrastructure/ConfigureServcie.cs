@@ -1,4 +1,4 @@
-﻿using Application.ConfigureService;
+﻿using Application.Contracts;
 using Infrastructure.Persistence;
 using Infrastructure.Persistence.Context;
 using Microsoft.EntityFrameworkCore;

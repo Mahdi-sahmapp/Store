@@ -24,6 +24,10 @@ namespace Infrastructure.Persistence.Context
         {
             base.OnModelCreating(modelbuilder);
             modelbuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
+            modelbuilder.Entity<Product>().HasQueryFilter(a => a.IsDelete == false);
+            modelbuilder.Entity<ProductBrand>().HasQueryFilter(a => a.IsDelete == false);
+            modelbuilder.Entity<ProductType>().HasQueryFilter(a => a.IsDelete == false);
         }
     }
 }

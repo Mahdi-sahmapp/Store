@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.ConfigureService
+namespace Application.Contracts
 {
     public interface IUnitOfWork
     {

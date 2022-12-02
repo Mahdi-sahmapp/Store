@@ -1,4 +1,4 @@
-﻿using Application.ConfigureService;
+﻿using Application.Contracts;
 using Domain.Entities.Base;
 using Infrastructure.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
@@ -41,7 +41,8 @@ namespace Infrastructure.Persistence
         public async Task DeleteAsync(int id, CancellationToken cancellationToken)
         {
             var dbSet = await GetByIdAsync(id, cancellationToken);
-            _context.Remove(dbSet);
+            dbSet.IsDelete = true;
+            await UpdateAsync(dbSet);
         }
 
         public async Task<IReadOnlyList<T>> GetAllAsync(CancellationToken cancellationToken)
