@@ -1,4 +1,5 @@
-﻿using Application.Features.Products.Queries.Get;
+﻿using Application.Features.ProductBrands.Queries.GetAll;
+using Application.Features.Products.Queries.Get;
 using Application.Features.Products.Queries.GetAll;
 using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;

@@ -1,4 +1,6 @@
 ﻿using Application.Contracts;
+using Application.Contracts.Specification;
+using Azure.Core;
 using Domain.Entities.Base;
 using Infrastructure.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
@@ -54,11 +56,26 @@ namespace Infrastructure.Persistence
         {
             return await _dbset.FindAsync(id, cancellationToken);
         }
-
+        
         public async Task<T> UpdateAsync(T Entity)
         {
             _context.Entry(Entity).State = EntityState.Modified;
             return await Task.FromResult(Entity);
+        }
+
+        public async Task<T> GetEntityWithSpec(ISpecification<T> spec, CancellationToken cancellationToken)
+        {
+            return await ApplySpecification(spec).FirstOrDefaultAsync(cancellationToken);
+        }
+
+        public async Task<IReadOnlyList<T>> ListAsyncSpec(ISpecification<T> spec, CancellationToken cancellationToken)
+        {
+            return await ApplySpecification(spec).ToListAsync(cancellationToken);
+        }
+
+        private IQueryable<T> ApplySpecification(ISpecification<T> spec)
+        {
+            return SpecificationEvaluator<T>.GetQuery(_dbset.AsQueryable(), spec);
         }
     }
 }

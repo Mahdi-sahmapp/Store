@@ -1,4 +1,5 @@
 ﻿using Application.Contracts;
+using Application.Features.Products.Queries.GetAll;
 using Domain.Entities;
 using MediatR;
 using System;
@@ -20,11 +21,14 @@ namespace Application.Features.Products.Queries.Get
 
         public async Task<Product> Handle(GetProductQuery request, CancellationToken cancellationToken)
         {
-            var entity = await _uow.Repository<Product>().GetByIdAsync(request.Id, cancellationToken);
 
+            var spec = new GetProductsSpec(request.Id);
+            return await _uow.Repository<Product>().GetEntityWithSpec(spec, cancellationToken);
+
+            //var entity = await _uow.Repository<Product>().GetByIdAsync(request.Id, cancellationToken);
             //TODO HandleException
-            if (entity == null) throw new Exception("Error message");
-            return entity;
+            //if (entity == null) throw new Exception("Error message");
+            //return entity;
         }
     }
 }
