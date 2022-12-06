@@ -1,5 +1,7 @@
 ﻿using Application.Contracts;
+using Application.Dto.Products;
 using Application.Features.Products.Queries.GetAll;
+using AutoMapper;
 using Domain.Entities;
 using MediatR;
 using System;
@@ -10,20 +12,22 @@ using System.Threading.Tasks;
 
 namespace Application.Features.Products.Queries.Get
 {
-    internal class GetProductQueryHandler : IRequestHandler<GetProductQuery, Product>
+    internal class GetProductQueryHandler : IRequestHandler<GetProductQuery, ProductDto>
     {
         private IUnitOfWork _uow;
-
-        public GetProductQueryHandler(IUnitOfWork uow)
+        private readonly IMapper _mapper;
+        public GetProductQueryHandler(IUnitOfWork uow, IMapper mapper)
         {
             _uow = uow;
+            _mapper = mapper;
         }
 
-        public async Task<Product> Handle(GetProductQuery request, CancellationToken cancellationToken)
+        public async Task<ProductDto> Handle(GetProductQuery request, CancellationToken cancellationToken)
         {
 
             var spec = new GetProductsSpec(request.Id);
-            return await _uow.Repository<Product>().GetEntityWithSpec(spec, cancellationToken);
+            var resualt = await _uow.Repository<Product>().GetEntityWithSpec(spec, cancellationToken);
+            return _mapper.Map<ProductDto>(resualt);
 
             //var entity = await _uow.Repository<Product>().GetByIdAsync(request.Id, cancellationToken);
             //TODO HandleException

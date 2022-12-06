@@ -28,8 +28,8 @@ namespace Web
             //autoMigration
             try
             {
-                await context.Database.MigrateAsync();
-                await GenerateData.SeedDataAsync(context, loggerFactory);
+                //await context.Database.MigrateAsync();
+                //await GenerateData.SeedDataAsync(context, loggerFactory);
             }
             catch (Exception e)
             {

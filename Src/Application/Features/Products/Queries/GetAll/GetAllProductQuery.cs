@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Application.Dto.Products;
+using Domain.Entities;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Application.Features.Products.Queries.GetAll
 {
-    public class GetAllProductQuery :IRequest<IEnumerable<Product>>
+    public class GetAllProductQuery :IRequest<IEnumerable<ProductDto>>
     {
     }
 }
