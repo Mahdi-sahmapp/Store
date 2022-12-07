@@ -12,6 +12,9 @@ namespace Web
             // Add services to the container.
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
+            // IHttpContextAccessor
+            builder.Services.AddHttpContextAccessor();
+
             builder.Services.AddSwaggerGen();
 
             return builder.Services;

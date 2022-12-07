@@ -16,7 +16,6 @@ namespace Domain.Entities
         public int ProductBrandId { get; set; }
         public string Description { get; set; }
         public bool IsActive { get; set; } = true;
-        public bool IsDelete { get; set; } = false;
         public string Summary { get; set; }
 
         public ProductType ProductType { get; set; }

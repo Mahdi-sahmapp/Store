@@ -63,6 +63,8 @@ namespace Infrastructure.Persistence
             return await Task.FromResult(Entity);
         }
 
+        //-----------------------------Specification-------------------------------------------------------------------------
+
         public async Task<T> GetEntityWithSpec(ISpecification<T> spec, CancellationToken cancellationToken)
         {
             return await ApplySpecification(spec).FirstOrDefaultAsync(cancellationToken);

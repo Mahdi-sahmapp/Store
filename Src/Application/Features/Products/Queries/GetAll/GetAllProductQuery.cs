@@ -1,4 +1,5 @@
-﻿using Application.Dto.Products;
+﻿using Application.Contracts;
+using Application.Dto.Products;
 using Domain.Entities;
 using MediatR;
 using System;
@@ -9,7 +10,8 @@ using System.Threading.Tasks;
 
 namespace Application.Features.Products.Queries.GetAll
 {
-    public class GetAllProductQuery :IRequest<IEnumerable<ProductDto>>
+    public class GetAllProductQuery : IRequest<IEnumerable<ProductDto>>, ICacheQuery
     {
+        public int HoursSaveData => 1; // 1 hour save data
     }
 }
