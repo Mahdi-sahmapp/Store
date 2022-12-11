@@ -2,6 +2,8 @@
 using Infrastructure.Persistence.SeedData;
 using Microsoft.EntityFrameworkCore;
 using Infrastructure.Persistence.Context;
+using Microsoft.AspNetCore.Mvc;
+using Domain.Exceptions;
 
 namespace Web
 {
@@ -11,6 +13,7 @@ namespace Web
         {
             // Add services to the container.
             builder.Services.AddControllers();
+            ApiBehaviorOptions(builder);
             builder.Services.AddEndpointsApiExplorer();
             // IHttpContextAccessor
             builder.Services.AddHttpContextAccessor();
@@ -54,6 +57,24 @@ namespace Web
             await app.RunAsync();
 
             return app; 
+        }
+
+        private static void ApiBehaviorOptions(WebApplicationBuilder builder)
+        {
+            // زمانیکه فرموت ورودی مطابقت نداشت
+            //TODO CHECK THIS
+            builder.Services.Configure<ApiBehaviorOptions>(option =>
+            {
+                option.InvalidModelStateResponseFactory = actionContext =>
+                {
+                    var errors = actionContext.ModelState
+                    .Where(a => a.Value.Errors.Any())
+                    .SelectMany(a => a.Value.Errors)
+                    .Select(a => a.ErrorMessage).ToList();
+
+                    return new BadRequestObjectResult(new ApiToReturn(400, errors));
+                };
+            });
         }
     }
 }

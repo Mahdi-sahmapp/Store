@@ -12,5 +12,7 @@ namespace Application.Contracts.Specification
     {
         Expression<Func<T, bool>> Predicate { get; }
         List<Expression<Func<T, object>>> Includs { get; }
+        Expression<Func<T,object>> OrderBy { get; }
+        Expression<Func<T,object>> OrderByDesc { get; }
     }
 }

@@ -15,6 +15,10 @@ namespace Application.Contracts.Specification
 
         public List<Expression<Func<T, object>>> Includs { get; } = new();
 
+        public Expression<Func<T, object>> OrderBy { get; private set; }
+
+        public Expression<Func<T, object>> OrderByDesc { get; private set; }
+
         public BaseSpecification()
         {
 
