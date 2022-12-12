@@ -11,10 +11,11 @@ namespace Web.Controllers
     public class ProductController : BaseApiController
     {
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ProductDto>>> Get(CancellationToken cancellationToken)
+        public async Task<ActionResult<IEnumerable<ProductDto>>> Get([FromQuery] GetAllProductQuery request, CancellationToken cancellationToken)
         {
-            return Ok(await Meditor.Send(new GetAllProductQuery(),cancellationToken));
+            return Ok(await Meditor.Send(request, cancellationToken));
         }
+
 
         [HttpGet("{id}")]
         public async Task<ActionResult<ProductDto>> Get([FromRoute] int id, CancellationToken cancellationToken)
